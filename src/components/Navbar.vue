@@ -15,6 +15,7 @@
         <router-link to="/donate" class="nav-route">
             <button class="nav-btn">Donate</button>
         </router-link>
+
         
     </div>
 </template>
@@ -22,7 +23,7 @@
 <script>
 export default {
     name: 'Navbar',
-    methods: {
+    props: {
     }
 }
 </script>

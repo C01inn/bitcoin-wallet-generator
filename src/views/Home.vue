@@ -1,6 +1,7 @@
 <template>
   <div class="home">
       <Navbar class="navbar"/>
+      <h3 class="wallets-generated">Over {{numWallets}} Wallets Created!</h3>
       <button class="gen-btn" @click="generateWallet()">Generate Bitcoin Wallet</button>
       <br>
       <button v-if="pubKey && privKey" class="paper-btn" @click="getPaperWallet()">Get Paper Wallet</button>
@@ -41,9 +42,17 @@ export default {
     return {
       pubKey: null,
       privKey: null,
+      apiUrl: 'http://127.0.0.1:9990',
+      numWallets: null,
     }
   },
-  mounted() {
+  created() {
+    // get number of total wallets generated
+    fetch(`${this.apiUrl}/`)
+    .then(res => res.json())
+    .then(resData => {
+      this.numWallets = parseInt(resData)
+    })
   },
   methods: {
     generateWallet() {
@@ -55,10 +64,23 @@ export default {
             this.pubKey = response.address;
             this.privKey = response.key;
 
+            // increment total wallets generated number
+            this.incrementWallet()
+
+            this.numWallets++;
+
             document.querySelector("#load-spin").style.display = 'none';
             clearInterval(keyGen);
           });
       }, 3500);
+    },
+    incrementWallet() {
+      fetch(this.apiUrl+'/new', {
+        funny: `"( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)"`
+      }).then(resp => resp.text())
+      .then(res => {
+        console.log(res)
+      })
     },
     getPaperWallet() {
       if (this.privKey && this.pubKey) {
@@ -69,7 +91,30 @@ export default {
 }
 </script>
 <style scoped>
-
+/* tamil */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5bjdu2ui.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5aDdu2ui.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7duw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 .home {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -83,6 +128,22 @@ export default {
   left: 0;
   top: 0;
   overflow-x: hidden;
+}
+
+
+.wallets-generated {
+  display: none;
+}
+
+@media screen and (min-width: 1300px) {
+  .wallets-generated {
+    position: fixed;
+    right: 3rem;
+    top: 4rem;
+    font-size: 2em;
+    display: block;
+    font-family: 'Catamaran', sans-serif;
+  }
 }
 
 .paper-btn {

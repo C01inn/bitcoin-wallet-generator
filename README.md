@@ -14,7 +14,13 @@
 
 #### The bitcoin wallets are generated using the [bitcoin-address-generator](https://github.com/niyas/bitcoin-address-generator) javascript library.
 
-##### ‎
+### 3. Qrious
+
+#### [Qrious](https://github.com/neocotic/qrious) is used to generate qrcodes for the wallet keys.
+
+### 4. jspdf
+
+#### [Jspdf](https://github.com/MrRio/jsPDF) is used to create the paper wallets in pdf format.
 
 ## Donate
 
