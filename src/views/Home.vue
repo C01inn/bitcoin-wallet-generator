@@ -2,6 +2,8 @@
   <div class="home">
       <Navbar class="navbar"/>
       <button class="gen-btn" @click="generateWallet()">Generate Bitcoin Wallet</button>
+      <br>
+      <button v-if="pubKey && privKey" class="paper-btn" @click="getPaperWallet()">Get Paper Wallet</button>
 
       <div id="wallet-data" class="wallet-card">
         <h1 class="wallet-detail">Your Wallet Details: </h1>
@@ -41,6 +43,8 @@ export default {
       privKey: null,
     }
   },
+  mounted() {
+  },
   methods: {
     generateWallet() {
       this.pubKey, this.privKey = '';
@@ -51,14 +55,15 @@ export default {
             this.pubKey = response.address;
             this.privKey = response.key;
 
-            this.$refs.papierPortefeuille.createPaperWallet(this.privKey, this.pubKey);
-
-
             document.querySelector("#load-spin").style.display = 'none';
             clearInterval(keyGen);
           });
       }, 3500);
-  
+    },
+    getPaperWallet() {
+      if (this.privKey && this.pubKey) {
+        this.$refs.papierPortefeuille.createPaperWallet(this.privKey, this.pubKey);
+      }
     }
   }
 }
@@ -80,16 +85,33 @@ export default {
   overflow-x: hidden;
 }
 
+.paper-btn {
+  background-color: rgba(129, 140, 2480, 1);
+  border: none;
+  border-radius: 0.4rem;
+  padding: .5rem .6rem .5rem .6rem;
+  font-size: 1.1rem;
+  line-height: 1.6rem;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  margin-top: 2rem;
+  overflow-x: hidden;
+}
 
+.paper-btn:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background-color: rgba(99, 102, 241, 1);
+
+}
+
+.paper-btn:active {
+  transform: scale(1.03);
+}
 
 
 #PaperWallet {
-  margin-top: 4rem;
-  overflow-x: hidden;
-  max-width: 90vw;
-  margin-right: auto;
-  margin-left: auto;
-  transform: scale(1.3);
+  display: none;
 }
 
 #spinner {
