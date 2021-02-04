@@ -1,24 +1,31 @@
-# bitcoin-wallet
+# Bitcoin Wallet Generator
 
-## Project setup
-```
-npm install
-```
+### [Bitcoin Wallet Generator](https://bitcoin-wallet.netlify.app) is a simple website that generators bitcoin wallets with a public and private key.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## ‎
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Tools Used
 
-### Lints and fixes files
-```
-npm run lint
-```
+#
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 1. Vuejs
+
+### This website is a Single Page Application that was created using the [Vuejs Javascript framework](https://cli.vuejs.org/config/).
+
+###### ‎
+
+## 2. bitcoin-address-generator
+
+### The bitcoin wallets are generated using the [bitcoin-address-generator](https://github.com/niyas/bitcoin-address-generator) javascript library.
+
+See [Configuration Reference](https://vuejs.org/).
+
+## ‎
+
+## Donate
+
+#
+
+If you would wish to support this project then please feel free to donate by sending bitcoin to the address below.
+
+3KgvXoAYCvW26XirrMnrYTDqkyBLzyXf5R
