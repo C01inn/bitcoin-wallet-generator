@@ -15,6 +15,8 @@
           <Spinner color width="100px" id="spinner"/>
         </div>
       </div>
+      <!-- paper wallet -->
+      <PaperWallet id="PaperWallet" ref="papierPortefeuille"/>
   </div>
 </template>
 
@@ -22,6 +24,7 @@
 // @ is an alias to /src
 import Navbar from '@/components/Navbar.vue'
 import Spinner from '@/components/Spinner.vue'
+import PaperWallet from '@/components/PaperWallet.vue'
 
 import { createWalletAddress } from 'bitcoin-address-generator'
 
@@ -30,6 +33,7 @@ export default {
   components: {
     Navbar,
     Spinner,
+    PaperWallet,
   },
   data() {
     return {
@@ -43,9 +47,12 @@ export default {
       document.querySelector("#load-spin").style.display = 'block';
       var keyGen = setInterval(() => {
           createWalletAddress(response => {
-            console.log(response);
+
             this.pubKey = response.address;
             this.privKey = response.key;
+
+            this.$refs.papierPortefeuille.createPaperWallet(this.privKey, this.pubKey);
+
 
             document.querySelector("#load-spin").style.display = 'none';
             clearInterval(keyGen);
@@ -57,6 +64,8 @@ export default {
 }
 </script>
 <style scoped>
+
+
 .home {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -71,6 +80,17 @@ export default {
   overflow-x: hidden;
 }
 
+
+
+
+#PaperWallet {
+  margin-top: 4rem;
+  overflow-x: hidden;
+  max-width: 90vw;
+  margin-right: auto;
+  margin-left: auto;
+  transform: scale(1.3);
+}
 
 #spinner {
   position: absolute;
@@ -217,4 +237,5 @@ export default {
     overflow-x: scroll;
   }
 }
+
 </style>
