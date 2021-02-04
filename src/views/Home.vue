@@ -4,7 +4,7 @@
       <button class="gen-btn" @click="generateWallet()">Generate Bitcoin Wallet</button>
 
       <div id="wallet-data" class="wallet-card">
-        <h1>Your Wallet Details: </h1>
+        <h1 class="wallet-detail">Your Wallet Details: </h1>
         <h3>Public Key: <p class="pubKey">{{pubKey ? pubKey : "N/A"}}</p></h3>
         <h3>Private Key: <p class="privKey">{{privKey ? privKey : "N/A"}}</p></h3>
 
@@ -181,19 +181,40 @@ export default {
 
 @media screen and (max-width: 700px) {
 
+  .wallet-detail {
+    max-width: 85%;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 1.6em;
+  }
+
   .gen-btn {
-      background-color: rgba(78, 145, 240, .9);
-      border: none;
-      border-radius: 0.4rem;
-      padding: .5rem .6rem .5rem .6rem;
-      font-size: 1.25rem;
-      line-height: 1.75rem;
-      color: white;
-      cursor: pointer;
-      outline: none;
-      margin-top: 2.5rem;
-      overflow-x: hidden;
-      transform: scale(.87);
+    background-color: rgba(78, 145, 240, .9);
+    border: none;
+    border-radius: 0.4rem;
+    padding: .5rem .6rem .5rem .6rem;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    margin-top: 1.5rem;
+    overflow-x: hidden;
+    transform: scale(.87);
+  }
+
+  .wallet-card {
+    border: 3px solid lightgray;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    margin-top: 2.2rem;
+    width: 80%;
+    height: 400px;
+    display: block;
+    word-wrap: break-word;
+    text-align: center;
+    overflow-x: scroll;
   }
 }
 </style>
