@@ -60,7 +60,7 @@ export default {
 
       doc.setFontSize(15)
       doc.setTextColor(5, 150, 105);
-      let splitPub = doc.splitTextToSize("3KgvXoAYCvW26XirrMnrYTDqkyBLzyXf5R", 180)
+      let splitPub = doc.splitTextToSize(this.publicKey, 180)
       doc.text(20, 35, splitPub)
       doc.addImage(this.pubQrCode, "PNG", 20, 40, 40, 40);
 
@@ -71,7 +71,7 @@ export default {
 
       doc.setFontSize(15);
       doc.setTextColor(220, 38, 38);
-      let splitKey = doc.splitTextToSize("KgvXoAYCvW26XirrMnrYTDqkyBLzyXf5KgvXoAYCvW26XirrMnrYTDqkyBLzyXf5", 180);
+      let splitKey = doc.splitTextToSize(this.privateKey, 180);
 
       doc.text(20, 110, splitKey)
       doc.addImage(this.privQrCode, "PNG", 20, 125, 40, 40)
