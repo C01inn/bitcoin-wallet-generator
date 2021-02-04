@@ -10,7 +10,6 @@
   "dependencies": {
     "bitcoin-address-generator": "^1.0.2",
     "core-js": "^3.6.5",
-    "jquery": "^3.5.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0"
   },
