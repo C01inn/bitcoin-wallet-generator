@@ -1,0 +1,12 @@
+*.tar
+*.tar.gz
+*.gz
+
+workspace
+./workspace/
+/workspace
+workspace/
+
+build.tar.gz
+build.gz
+build.tar

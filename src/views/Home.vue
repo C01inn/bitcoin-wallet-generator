@@ -1,7 +1,7 @@
 <template>
   <div class="home">
       <Navbar class="navbar"/>
-      <h3 class="wallets-generated">Over {{numWallets}} Wallets Created!</h3>
+      <h3 class="wallets-generated" style="display: none;">Over {{numWallets}} Wallets Created!</h3>
       <button class="gen-btn" @click="generateWallet()">Generate Bitcoin Wallet</button>
       <br>
       <button v-if="pubKey && privKey" class="paper-btn" @click="getPaperWallet()">Get Paper Wallet</button>
@@ -19,7 +19,6 @@
         </div>
       </div>
       <!-- paper wallet -->
-      <PaperWallet id="PaperWallet" ref="papierPortefeuille"/>
   </div>
 </template>
 
@@ -27,7 +26,7 @@
 // @ is an alias to /src
 import Navbar from '@/components/Navbar.vue'
 import Spinner from '@/components/Spinner.vue'
-import PaperWallet from '@/components/PaperWallet.vue'
+const paperWallet = () => import('@/components/paperWallet.js');
 
 import { createWalletAddress } from 'bitcoin-address-generator'
 
@@ -36,7 +35,6 @@ export default {
   components: {
     Navbar,
     Spinner,
-    PaperWallet,
   },
   data() {
     return {
@@ -84,7 +82,10 @@ export default {
     },
     getPaperWallet() {
       if (this.privKey && this.pubKey) {
-        this.$refs.papierPortefeuille.createPaperWallet(this.privKey, this.pubKey);
+        // must use promise because file is lazy loaded
+        paperWallet().then((wallets) => {
+          wallets.createPaperWallet(this.privKey, this.pubKey);
+        })
       }
     }
   }

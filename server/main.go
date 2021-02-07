@@ -16,8 +16,8 @@ import (
 var db *sql.DB
 
 func main() {
-
-	db, err := sql.Open("mysql", "root:" + os.Args[1] + "@tcp(127.0.0.1:1800)/bitcoinWallets")
+	// mymysql.mysql.database.azure.com
+	db, err := sql.Open("mysql", os.Args[1]+":"+ os.Args[2]+"@tcp("+os.Args[3]+")/bitcoinWallets?tls=true")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -46,8 +46,6 @@ func main() {
 	app.Get(`/new`, func(req Req) UrlResp {
 		// allow all origins
 		req.AddHeader("Access-Control-Allow-Origin", "*")
-		
-		fmt.Println(`new`)
 
 		insertion, err := db.Prepare("UPDATE walletNum SET numOfWalletsGenerated = numOfWalletsGenerated + 1 WHERE numOfWalletsGenerated > -1")
 		if err != nil {
@@ -57,5 +55,15 @@ func main() {
 		return SendStr("done")
 	})
 
-	app.Listen(9990)
+	// listen on specificed port
+	var port int
+	port = 9990
+	if len(os.Args) > 4 {
+		port, err = strconv.Atoi(os.Args[4]) 
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+	fmt.Println(port)
+	app.Listen(port)
 }

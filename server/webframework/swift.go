@@ -43,8 +43,10 @@ type UrlResp struct {
 	contentType string
 	filename    string
 }
+
 // contains all the routes
 var allRoutes [][]string
+
 // contains routes with their coresponding functions
 var routeFunc map[string]*(func(req Req) UrlResp)
 
@@ -189,7 +191,7 @@ func appConstructor(ap App) App {
 								w.Header().Set(headerName, headerValue)
 							},
 						}
- 
+
 						resp := (*routeFunc[hashRoute])(requestObj)
 
 						// check if user is returning html
@@ -997,6 +999,7 @@ func RenderHtml(filepath string, temp_data interface{}) UrlResp {
 	}
 
 }
+
 // function for returning plain text
 func SendStr(bodyu string) UrlResp {
 	return_value := UrlResp{
@@ -1142,8 +1145,8 @@ func RemoveCookie(request Req, name string) {
 
 func Redirect(url string) UrlResp {
 	respData := UrlResp{
-		body: url,
-		filename: "",
+		body:        url,
+		filename:    "",
 		contentType: "redirect",
 	}
 	return respData
