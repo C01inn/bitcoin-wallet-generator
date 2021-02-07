@@ -1,6 +1,0 @@
-Dockerfile
-*.tar.gz
-*.tar
-*.gz
-
-build.gz

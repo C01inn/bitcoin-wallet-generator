@@ -18,7 +18,6 @@
           <Spinner color width="100px" id="spinner"/>
         </div>
       </div>
-      <!-- paper wallet -->
   </div>
 </template>
 
@@ -26,6 +25,7 @@
 // @ is an alias to /src
 import Navbar from '@/components/Navbar.vue'
 import Spinner from '@/components/Spinner.vue'
+// lazy load paper wallet utils
 const paperWallet = () => import('@/components/paperWallet.js');
 
 import { createWalletAddress } from 'bitcoin-address-generator'
@@ -81,6 +81,9 @@ export default {
       })
     },
     getPaperWallet() {
+      // download a paper wallet in pdf format
+
+      // ensure that user has generated a wallet
       if (this.privKey && this.pubKey) {
         // must use promise because file is lazy loaded
         paperWallet().then((wallets) => {
