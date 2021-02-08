@@ -22,9 +22,9 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import Navbar from '@/components/Navbar.vue'
 import Spinner from '@/components/Spinner.vue'
+
 // lazy load paper wallet utils
 const paperWallet = () => import('@/components/paperWallet.js');
 
@@ -45,12 +45,6 @@ export default {
     }
   },
   created() {
-    // get number of total wallets generated
-    fetch(`${this.apiUrl}/`)
-    .then(res => res.json())
-    .then(resData => {
-      this.numWallets = parseInt(resData)
-    })
   },
   methods: {
     generateWallet() {
@@ -62,23 +56,12 @@ export default {
             this.pubKey = response.address;
             this.privKey = response.key;
 
-            // increment total wallets generated number
-            this.incrementWallet()
-
             this.numWallets++;
 
             document.querySelector("#load-spin").style.display = 'none';
             clearInterval(keyGen);
           });
       }, 3500);
-    },
-    incrementWallet() {
-      fetch(this.apiUrl+'/new', {
-        funny: `"( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)"`
-      }).then(resp => resp.text())
-      .then(res => {
-        console.log(res)
-      })
     },
     getPaperWallet() {
       // download a paper wallet in pdf format
@@ -93,6 +76,8 @@ export default {
     }
   }
 }
+
+
 </script>
 <style scoped>
 /* tamil */
